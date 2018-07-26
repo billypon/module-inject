@@ -1,0 +1,17 @@
+{
+  "name": "module-inject",
+  "version": "1.0.0",
+  "description": "inject code to module",
+  "author": "billypon <billypon@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "dependency-parent": "^1.0.0",
+    "mocha": "^5.2.0",
+    "module-find": "^1.0.2"
+  }
+}
