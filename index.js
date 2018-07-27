@@ -1,15 +1,21 @@
 var fs = require('fs');
 
-module.exports = function (name, callback, root) {
-  var find = require('module-find')(root);
-  var module = find(name);
-  if (!module) {
-    return console.error('no such module: ' + (name instanceof Array ? name.join(', ') : name));
-  }
-  var file = require.resolve(module);
-  var str = fs.readFileSync(file).toString();
-  var result = callback(str, file);
-  if (result.change) {
-    fs.writeFileSync(file, result.str);
+module.exports = function (root) {
+  var find = typeof(root) === 'function' ? root : require('module-find')(root);
+  return function (name, callback) {
+    var module = find(name);
+    if (!module) {
+      throw {message: 'no such module', name: name};
+    }
+
+    var file = require.resolve(module);
+    var str = fs.readFileSync(file).toString();
+
+    if (callback) {
+      str = callback(str, file);
+      if (str !== false) {
+        fs.writeFileSync(file, str);
+      }
+    }
   }
 }
