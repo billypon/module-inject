@@ -3,6 +3,13 @@ var assert = require('assert');
 var inject = require('..')();
 
 it('inject', function () {
+  inject('dependency-parent', function (exports) {
+    return 'hello world';
+  });
+  assert.equal('hello world', require('dependency-parent'));
+});
+
+it('hard inject', function () {
   var file;
   inject('dependency-parent', function (str, x) {
     file = x;
@@ -13,7 +20,7 @@ it('inject', function () {
     }
     str = 'module.exports = false;';
     return str;
-  });
+  }, true);
   var fs = require('fs');
   var str = fs.readFileSync(file).toString();
   assert.equal(true, str.indexOf('false') > 0);
