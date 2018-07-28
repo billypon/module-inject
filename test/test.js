@@ -16,7 +16,7 @@ it('hard inject', function () {
     if (str.indexOf('false') > 0) {
       return false;
     } else if (str.indexOf('module.exports') < 0) {
-      throw 'fail to inject';
+      throw new Error('fail to inject');
     }
     str = 'module.exports = false;';
     return str;

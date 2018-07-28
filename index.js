@@ -5,7 +5,7 @@ module.exports = function (root) {
   return function (name, callback, hard) {
     var module = find(name);
     if (!module) {
-      throw {message: 'no such module', name: name};
+      throw new Error('no such module');
     }
 
     if (!callback) {
