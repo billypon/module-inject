@@ -22,6 +22,6 @@ it('hard inject', function () {
     return str;
   }, true);
   var fs = require('fs');
-  var str = fs.readFileSync(file).toString();
+  var str = fs.readFileSync(file, 'utf-8');
   assert.equal(true, str.indexOf('false') > 0);
 });

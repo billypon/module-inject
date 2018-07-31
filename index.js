@@ -22,10 +22,10 @@ module.exports = function (root) {
         module.exports = exports;
       }
     } else {
-      var str = fs.readFileSync(file).toString();
+      var str = fs.readFileSync(file, 'utf-8');
       str = callback(str, file);
       if (str !== false) {
-        fs.writeFileSync(file, str);
+        fs.writeFileSync(file, str, 'utf-8');
       }
     }
   }
